@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectToDatabase = require("./dbConnection/mongoDBConnexion");
-const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/productRoutes");
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,7 +16,7 @@ app.use(cors());
 connectToDatabase();
 
 // userRoutes
-app.use("/users", userRoutes);
+app.use("/products", userRoutes);
 
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
 
