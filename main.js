@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const connectToDatabase = require("./dbConnection/mongoDBConnexion");
 const userRoutes = require("./routes/productRoutes");
+const { swaggerDocs, swaggerUi } = require("./swagger");
 
 
 const app = express();
@@ -18,16 +19,10 @@ connectToDatabase();
 // userRoutes
 app.use("/products", userRoutes);
 
-app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
+// Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-
-
-
-
-
-
-
-
-
-
-
+app.listen(PORT, () => {
+  console.log(`Serveur démarré sur le port ${PORT}`)
+  console.log(`Swagger UI accessible à l'adresse http://localhost:${PORT}/api-docs`)
+});
